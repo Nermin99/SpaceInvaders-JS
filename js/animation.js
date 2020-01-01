@@ -3,7 +3,7 @@
 // https://gamedevelopment.tutsplus.com/tutorials/an-introduction-to-spritesheet-animation--gamedev-13099
 
 export default class Explosion {
-  constructor (x, y, img, speed, active, isRemovable) {
+  constructor(x, y, img, speed, active, isRemovable) {
     this.x = x
     this.y = y
     this.img = img
@@ -24,20 +24,20 @@ export default class Explosion {
   }
 
   // Updates the frame's x-value
-  updateFrame () {
+  updateFrame() {
     this.curFrame++
     this.srcX = this.curFrame * this.frameWidth
   }
 
   // checks if animation is finished
-  isFinished () {
+  isFinished() {
     if (this.curFrame >= this.frameCount) {
       this.isRemovable = true
     }
   }
 
   // returns x-value for current frame
-  getSrcX () {
+  getSrcX() {
     var deltaTime = (Date.now() - this.lastUpdateTime) / 1000
     if (deltaTime >= 0.05) {
       this.updateFrame()

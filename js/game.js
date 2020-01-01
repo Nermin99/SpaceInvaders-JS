@@ -39,7 +39,7 @@ let shotSpeed = canvasHeight / 600 * 500 // k * px/s
 let shipSpeed = canvasWidth / 800 * 400 // k * px/s
 let alienSpeed = canvasHeight / 600 * 80 // k * px/s
 
-function init () {
+function init() {
   winSound.load()
   fail1Sound.load()
   fail2Sound.load()
@@ -58,7 +58,7 @@ function init () {
   loadObjects()
 }
 
-function loadObjects () {
+function loadObjects() {
   const xShip = (canvasWidth - shipImg.width) / 2
   const yShip = canvasHeight - shipImg.height - gap / 2
   ship = new Entity(xShip, yShip, shipImg, shipSpeed, active)
@@ -74,7 +74,7 @@ function loadObjects () {
   gameLoop()
 }
 
-function gameLoop () {
+function gameLoop() {
   const deltaTime = Date.now() - lastUpdateTime
 
   update(deltaTime / 1000)
@@ -91,7 +91,7 @@ function gameLoop () {
   })
 }
 
-function update (deltaTime) {
+function update(deltaTime) {
   // mellanslag = skjut
   if (32 in keysDown) {
     fire()
@@ -123,7 +123,7 @@ function update (deltaTime) {
   }
 }
 
-function render (text, color) {
+function render(text, color) {
   ctx.save()
 
   // Background
@@ -171,7 +171,7 @@ function render (text, color) {
 
 /* Hjälp-funktioner */
 
-function fire () {
+function fire() {
   if (shot == null) {
     shot = new Entity(ship.x + (shipImg.width - shotImg.width) / 2, ship.y, shotImg, shotSpeed)
     shotSound.load()
@@ -179,7 +179,7 @@ function fire () {
   }
 }
 
-function moveLeft (deltaTime) {
+function moveLeft(deltaTime) {
   if (ship.x <= 0) {
     ship.x = 0
   } else {
@@ -187,7 +187,7 @@ function moveLeft (deltaTime) {
   }
 }
 
-function moveRight (deltaTime) {
+function moveRight(deltaTime) {
   if (ship.x + ship.img.width >= canvas.width) {
     ship.x = canvas.width - ship.img.width
   } else {
@@ -195,7 +195,7 @@ function moveRight (deltaTime) {
   }
 }
 
-function checkCollisionAndRemove () {
+function checkCollisionAndRemove() {
   for (let i = 0; i < alienArray.length; i++) {
     if (gameRunning) {
       if (alienArray[i].active) {
@@ -254,7 +254,7 @@ function checkCollisionAndRemove () {
   }
 }
 
-function intersects (A, B) {
+function intersects(A, B) {
   const widthA = A.x + A.img.width
   const widthB = B.x + B.img.width
   const heightA = A.y + A.img.height
@@ -267,11 +267,11 @@ function intersects (A, B) {
           (heightA < A.y || heightA > B.y))
 }
 
-function restart (roundWin) {
+function restart(roundWin) {
   removeEventListener('keydown', keyDown)
   addEventListener('keydown', listen)
 
-  function listen (e) {
+  function listen(e) {
     // mellanslag
     if (e.keyCode === 32) {
       removeEventListener('keydown', listen)
@@ -282,7 +282,7 @@ function restart (roundWin) {
   }
 }
 
-function levels (roundWin) {
+function levels(roundWin) {
   if (roundWin) {
     if (canvasWidth - (nX * alienImg.width + (nX - 1) * gap) > alienImg.width || nY * alienImg.height + nY * gap < ship.y - alienImg.height) {
       if (nX < 3) {
@@ -320,11 +320,11 @@ function levels (roundWin) {
   }
 }
 
-function keyDown (e) {
+function keyDown(e) {
   keysDown[e.keyCode] = true
 }
 
-function keyUp (e) {
+function keyUp(e) {
   delete keysDown[e.keyCode]
 }
 
